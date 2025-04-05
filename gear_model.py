@@ -1,5 +1,6 @@
 import tempfile
 import os
+from datetime import timedelta
 from cadquery import Workplane, Edge, Wire, Vector, exporters
 from math import radians, cos, tan, acos, degrees, sin
 import pyvista as pv
@@ -138,7 +139,7 @@ with col1:
 
 
 # Caching and exporting gear model
-@st.cache_data
+@st.cache_data(ttl=timedelta(hours=0.5), max_entries=10)
 def generate_and_export_gear_cached(module, teeth, center_hole_dia, height, file_format):
     gear = generate_gear(module, teeth, center_hole_dia, height)
     return generate_temp_file(gear, file_format)

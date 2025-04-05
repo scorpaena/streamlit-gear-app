@@ -1,11 +1,20 @@
 services:
   streamlit_gear_app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: maxeval/gear:latest
     container_name: streamlit_gear_app
     ports:
-      - "8501:8501"
+      - "127.0.0.1:8502:8502"
     environment:
      - OS_TYPE=linux
     volumes:
      - .:/app
     restart: always
+    command:
+      - streamlit
+      - run
+      - gear_model.py
+      - --server.port=8502
+      - --server.address=0.0.0.0

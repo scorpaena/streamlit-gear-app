@@ -9,6 +9,7 @@ services:
       - "127.0.0.1:8502:8502"
     environment:
      - OS_TYPE=linux
+     - CACHE_LIFE_PERIOD=600
     volumes:
      - .:/app
     restart: always
